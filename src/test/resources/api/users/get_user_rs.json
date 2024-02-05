@@ -1,0 +1,13 @@
+{
+  "data": {
+    "id": "type:Integer",
+    "email": "${user.email}",
+    "first_name": "${user.firstName}",
+    "last_name": "${user.lastName}",
+    "avatar": "skip"
+  },
+  "support": {
+    "url": "skip",
+    "text": "type:String"
+  }
+}
