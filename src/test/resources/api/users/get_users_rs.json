@@ -1,0 +1,21 @@
+{
+  "page": "${page_number}",
+  "per_page": "${per_page}",
+  "total": "${total}",
+  "total_pages": "${total_pages}",
+  "data": [
+    <#list data as user>,
+    {
+      "id": "type:Integer",
+      "email": "${user.email}",
+      "first_name": "${user.firstName}",
+      "last_name": "${user.lastName}",
+      "avatar": "skip"
+    },<#if user?has_next>,</#if>
+    </#list>
+  ],
+  "support": {
+    "url": "skip",
+    "text": "skip"
+  }
+}
