@@ -1,4 +1,4 @@
-package com.solvd.test;
+package com.solvd.test.api;
 
 import com.solvd.test.api.CreateUser;
 import com.solvd.test.api.DeleteUser;

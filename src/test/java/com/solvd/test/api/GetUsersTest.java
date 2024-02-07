@@ -1,4 +1,4 @@
-package com.solvd.test;
+package com.solvd.test.api;
 
 import com.solvd.test.api.GetUsers;
 import com.solvd.test.domain.User;

@@ -1,6 +1,5 @@
-package com.solvd.test;
+package com.solvd.test.api;
 
-import com.solvd.test.api.GetUserById;
 import com.solvd.test.domain.User;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import org.testng.annotations.Test;

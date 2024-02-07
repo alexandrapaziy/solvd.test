@@ -8,8 +8,8 @@ import com.zebrunner.carina.api.apitools.builder.NotStringValuesProcessor;
 import com.zebrunner.carina.api.http.HttpMethodType;
 
 @Endpoint(url = "${config.api_url}/api/register", methodType = HttpMethodType.POST)
-@RequestTemplatePath(path = "api/users/register/register_successful_rq.json")
-@ResponseTemplatePath(path = "api/users/register/register_successful_rs.json")
+@RequestTemplatePath(path = "api/register/register_successful_rq.json")
+@ResponseTemplatePath(path = "api/register/register_successful_rs.json")
 public class RegisterSuccessful extends AbstractApiMethodV2 {
     public RegisterSuccessful() {
         ignorePropertiesProcessor(NotStringValuesProcessor.class);
