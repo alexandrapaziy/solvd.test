@@ -8,8 +8,8 @@ import com.zebrunner.carina.api.apitools.builder.NotStringValuesProcessor;
 import com.zebrunner.carina.api.http.HttpMethodType;
 
 @Endpoint(url = "${config.api_url}/api/login", methodType = HttpMethodType.POST)
-@RequestTemplatePath(path = "api/users/login/login_unsuccessful_rq.json")
-@ResponseTemplatePath(path = "api/users/login/login_unsuccessful_rs.json")
+@RequestTemplatePath(path = "api/login/login_unsuccessful_rq.json")
+@ResponseTemplatePath(path = "api/login/login_unsuccessful_rs.json")
 public class LoginUnsuccessful extends AbstractApiMethodV2 {
     public LoginUnsuccessful() {
         ignorePropertiesProcessor(NotStringValuesProcessor.class);

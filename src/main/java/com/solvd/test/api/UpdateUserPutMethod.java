@@ -10,8 +10,8 @@ import com.zebrunner.carina.api.http.HttpMethodType;
 @Endpoint(url = "${config.api_url}/api/users/${user_id}", methodType = HttpMethodType.PUT)
 @RequestTemplatePath(path = "api/users/update_user_rq.json")
 @ResponseTemplatePath(path = "api/users/update_user_rs.json")
-public class UpdateUserPut extends AbstractApiMethodV2 {
-    public UpdateUserPut(int id) {
+public class UpdateUserPutMethod extends AbstractApiMethodV2 {
+    public UpdateUserPutMethod(int id) {
         replaceUrlPlaceholder("user_id", String.valueOf(id));
         ignorePropertiesProcessor(NotStringValuesProcessor.class);
     }

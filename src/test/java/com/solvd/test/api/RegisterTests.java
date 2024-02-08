@@ -1,4 +1,4 @@
-package com.solvd.test;
+package com.solvd.test.api;
 
 import com.solvd.test.api.register.RegisterSuccessful;
 import com.solvd.test.api.register.RegisterUnsuccessful;
@@ -6,9 +6,9 @@ import com.solvd.test.domain.User;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import org.testng.annotations.Test;
 
-public class RegisterTest {
+public class RegisterTests {
     @Test
-    public void verifyRegistrySuccessful() {
+    public void verifyRegistrySuccessfulTest() {
         User user = new User();
         user.setEmail("eve.holt@reqres.in");
         user.setPassword("pistol");
@@ -18,10 +18,11 @@ public class RegisterTest {
 
         registerSuccessful.expectResponseStatus(HttpResponseStatusType.OK_200);
         registerSuccessful.callAPI();
+        registerSuccessful.validateResponse();
     }
 
     @Test
-    public void verifyRegistryUnsuccessful() {
+    public void verifyRegistryUnsuccessfulTest() {
         User user = new User();
         user.setEmail("sydney@fife");
 
@@ -30,5 +31,6 @@ public class RegisterTest {
 
         registerUnsuccessful.expectResponseStatus(HttpResponseStatusType.BAD_REQUEST_400);
         registerUnsuccessful.callAPI();
+        registerUnsuccessful.validateResponse();
     }
 }
