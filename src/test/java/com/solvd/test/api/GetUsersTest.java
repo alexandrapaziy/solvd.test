@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class GetUsersTest {
     @Test
-    public void verifyGetUsersTest() {
+    public void verifyUsersAreCorrectTest() {
         int pageNumber = 2;
         int perPage = 6;
         int total = 12;
@@ -24,7 +24,7 @@ public class GetUsersTest {
         dataList.add(createUserData(11, "george.edwards@reqres.in", "George", "Edwards"));
         dataList.add(createUserData(12, "rachel.howell@reqres.in", "Rachel", "Howell"));
 
-        GetUsers getUsers = new GetUsers(pageNumber);
+        GetUsersMethod getUsers = new GetUsersMethod(pageNumber);
         getUsers.addProperties(Map.of(
                 "page_number", pageNumber,
                 "per_page", perPage,

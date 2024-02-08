@@ -6,7 +6,7 @@ import com.solvd.test.domain.User;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import org.testng.annotations.Test;
 
-public class LoginTest {
+public class LoginTests {
     @Test
     public void verifyLoginSuccessfulTest() {
         User user = new User();

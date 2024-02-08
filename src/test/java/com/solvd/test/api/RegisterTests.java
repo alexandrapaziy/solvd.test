@@ -6,7 +6,7 @@ import com.solvd.test.domain.User;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
 import org.testng.annotations.Test;
 
-public class RegisterTest {
+public class RegisterTests {
     @Test
     public void verifyRegistrySuccessfulTest() {
         User user = new User();

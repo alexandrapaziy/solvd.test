@@ -8,8 +8,8 @@ import com.zebrunner.carina.api.http.HttpMethodType;
 
 @Endpoint(url = "${config.api_url}/api/users/${user_id}", methodType = HttpMethodType.GET)
 @ResponseTemplatePath(path = "api/users/get_user_rs.json")
-public class GetUserById extends AbstractApiMethodV2 {
-    public GetUserById(int userId) {
+public class GetUserByIdMethod extends AbstractApiMethodV2 {
+    public GetUserByIdMethod(int userId) {
         replaceUrlPlaceholder("user_id", String.valueOf(userId));
         ignorePropertiesProcessor(NotStringValuesProcessor.class);
     }

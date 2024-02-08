@@ -10,14 +10,14 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
 
-public class UserTest {
+public class UserTests {
     @Test
     public void verifyCreateUserTest() {
         User user = new User();
         user.setName("morpheus");
         user.setJob("leader");
 
-        CreateUser createUser = new CreateUser();
+        CreateUserMethod createUser = new CreateUserMethod();
         createUser.addProperty("user", user);
 
         createUser.expectResponseStatus(HttpResponseStatusType.CREATED_201);
@@ -36,7 +36,7 @@ public class UserTest {
         user.setName("morpheus");
         user.setJob("zion resident");
 
-        UpdateUserPut updateUserPut = new UpdateUserPut(user.getId());
+        UpdateUserPutMethod updateUserPut = new UpdateUserPutMethod(user.getId());
         updateUserPut.addProperty("user", user);
 
         updateUserPut.expectResponseStatus(HttpResponseStatusType.OK_200);
@@ -55,7 +55,7 @@ public class UserTest {
         user.setName("morpheus");
         user.setJob("zion resident");
 
-        UpdateUserPatch updateUserPatch = new UpdateUserPatch(user.getId());
+        UpdateUserPatchMethod updateUserPatch = new UpdateUserPatchMethod(user.getId());
         updateUserPatch.addProperty("user", user);
 
         updateUserPatch.expectResponseStatus(HttpResponseStatusType.OK_200);
@@ -72,7 +72,7 @@ public class UserTest {
         User user = new User();
         user.setId(2);
 
-        DeleteUser deleteUser = new DeleteUser(user.getId());
+        DeleteUserMethod deleteUser = new DeleteUserMethod(user.getId());
 
         deleteUser.expectResponseStatus(HttpResponseStatusType.NO_CONTENT_204);
         deleteUser.callAPI();
