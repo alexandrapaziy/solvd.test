@@ -1,9 +1,5 @@
 package com.solvd.test.api;
 
-import com.solvd.test.api.CreateUser;
-import com.solvd.test.api.DeleteUser;
-import com.solvd.test.api.UpdateUserPatch;
-import com.solvd.test.api.UpdateUserPut;
 import com.solvd.test.domain.User;
 import com.zebrunner.carina.api.apitools.validation.JsonComparatorContext;
 import com.zebrunner.carina.api.http.HttpResponseStatusType;
@@ -16,25 +12,25 @@ import java.time.format.DateTimeParseException;
 
 public class UserTest {
     @Test
-    public void verifyCreateUser() {
+    public void verifyCreateUserTest() {
         User user = new User();
         user.setName("morpheus");
         user.setJob("leader");
 
-        CreateUser createUser = new CreateUser(user.getName(), user.getJob());
+        CreateUser createUser = new CreateUser();
         createUser.addProperty("user", user);
 
         createUser.expectResponseStatus(HttpResponseStatusType.CREATED_201);
         createUser.callAPI();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
-                .<String>withPredicate("datePredicate", date -> isDateValid(date) && ZonedDateTime.parse(date).isAfter(LocalDate.of(2000, 1, 1).atStartOfDay(ZoneId.systemDefault())));
+                .<String>withPredicate("datePredicate", date -> isDateValid(date));
 
         createUser.validateResponse(comparatorContext);
     }
 
     @Test
-    public void verifyUpdateUserPut() {
+    public void verifyUpdateUserPutTest() {
         User user = new User();
         user.setId(2);
         user.setName("morpheus");
@@ -47,13 +43,13 @@ public class UserTest {
         updateUserPut.callAPI();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
-                .<String>withPredicate("datePredicate", date -> isDateValid(date) && ZonedDateTime.parse(date).isAfter(LocalDate.of(2000, 1, 1).atStartOfDay(ZoneId.systemDefault())));
+                .<String>withPredicate("datePredicate", date -> isDateValid(date));
 
         updateUserPut.validateResponse(comparatorContext);
     }
 
     @Test
-    public void verifyUpdateUserPatch() {
+    public void verifyUpdateUserPatchTest() {
         User user = new User();
         user.setId(2);
         user.setName("morpheus");
@@ -66,18 +62,17 @@ public class UserTest {
         updateUserPatch.callAPI();
 
         JsonComparatorContext comparatorContext = JsonComparatorContext.context()
-                .<String>withPredicate("datePredicate", date -> isDateValid(date) && ZonedDateTime.parse(date).isAfter(LocalDate.of(2000, 1, 1).atStartOfDay(ZoneId.systemDefault())));
+                .<String>withPredicate("datePredicate", date -> isDateValid(date));
 
         updateUserPatch.validateResponse(comparatorContext);
     }
 
     @Test
-    public void verifyDeleteUser() {
+    public void verifyDeleteUserTest() {
         User user = new User();
         user.setId(2);
 
         DeleteUser deleteUser = new DeleteUser(user.getId());
-        deleteUser.addProperty("user", user);
 
         deleteUser.expectResponseStatus(HttpResponseStatusType.NO_CONTENT_204);
         deleteUser.callAPI();
@@ -85,8 +80,8 @@ public class UserTest {
 
     private static boolean isDateValid(String date) {
         try {
-            ZonedDateTime.parse(date);
-            return true;
+            ZonedDateTime parsedDate = ZonedDateTime.parse(date);
+            return parsedDate.isAfter(LocalDate.of(2000, 1, 1).atStartOfDay(ZoneId.systemDefault()));
         } catch (DateTimeParseException e) {
             return false;
         }
