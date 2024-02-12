@@ -23,7 +23,7 @@ public class HomePage extends AbstractPage {
     private ExtendedWebElement banner;
 
     @FindBy(xpath = "//a[@class='vetrina__link']")
-    private List<ShowcaseItemComponent> showcaseItems;
+    private List<ExtendedWebElement> showcaseItems;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -33,24 +33,26 @@ public class HomePage extends AbstractPage {
     @Override
     public void open() {
         openURL(Configuration.getRequired("web_url"));
+        regionalBanner.clickCloseBannerButton();
     }
 
     public HeaderComponent getHeader() {
         return header;
     }
 
+    public boolean isCatalogPresent() {
+        return catalog.isUIObjectPresent();
+    }
+
     public CatalogComponent getCatalog() {
         return catalog;
     }
 
-    public BannerComponent getRegionalBanner() {
-        return regionalBanner;
-    }
-
     public ShopCategoryPage clickShowcaseItemName(String name) {
-        for (ShowcaseItemComponent showcaseItem : showcaseItems) {
-            if (showcaseItem.getShowcaseItemNameText().trim().equals(name)) {
-                return showcaseItem.clickShowcaseItemName();
+        for (ExtendedWebElement showcaseItem : showcaseItems) {
+            if (showcaseItem.getText().toLowerCase().trim().equals(name.toLowerCase())) {
+                showcaseItem.click();
+                return new ShopCategoryPage(getDriver());
             }
         }
         return null;

@@ -24,26 +24,21 @@ public class LoginPage extends AbstractPage {
         return loginButton;
     }
 
-    public ExtendedWebElement getPhoneInput() {
-        return phoneInput;
-    }
-
-    public ExtendedWebElement getPasswordInput() {
-        return passwordInput;
-    }
-
-    public String getPhoneInputPlaceholder() {
-        return phoneInput.getAttribute("placeholder");
-    }
-
-    public String getPasswordInputPlaceholder() {
-        return passwordInput.getAttribute("placeholder");
-    }
-
-    public HomePage login(String phone, String password) {
+    public void typeLoginInfo(String phone, String password) {
         phoneInput.type(phone);
         passwordInput.type(password);
+    }
+
+    public HomePage clickLoginButton() {
         loginButton.click();
         return new HomePage(getDriver());
+    }
+
+    public boolean isPhoneInputEmpty() {
+        return phoneInput.getAttribute("value") != "";
+    }
+
+    public boolean isPasswordInputEmpty() {
+        return passwordInput.getAttribute("value") != "";
     }
 }

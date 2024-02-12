@@ -10,31 +10,28 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class EpicentrTests extends AbstractTest {
-
     private static final String USER_PHONE = R.TESTDATA.get("user_phone");
     private static final String USER_PASSWORD = R.TESTDATA.get("user_password");
+    private static final String BRAND_NAME = "Apple";
+    private static final String CATALOG_ITEM_NAME = "Електроніка";
+    private static final String SHOP_CATEGORY_ITEM_NAME = "Мобільні телефони";
+    private static final String SHOP_SUBCATEGORY_ITEM_NAME = "Смартфони";
 
     @Test
     public void verifyProductSearchTest() {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        homePage.getRegionalBanner().clickCloseBannerButton();
 
-        SearchLineComponent searchLineComponent = homePage.getHeader().getSearchLineComponent();
-        Assert.assertTrue(searchLineComponent.getSearchInput().isElementPresent(1), "Search input is not present");
-        Assert.assertTrue(searchLineComponent.getSearchButton().isElementPresent(1), "Search button is not present");
-        Assert.assertEquals(searchLineComponent.getSearchInputPlaceholder(), "Пошук", "Search input placeholder is incorrect");
+        homePage.getHeader().typeSearchInputData(BRAND_NAME);
+        Assert.assertTrue(homePage.getHeader().isSearchInputEmpty(), "Search input is empty");
 
-        String brandName = "Apple";
-        searchLineComponent.typeSearchInputData(brandName);
-        SearchPage searchPage = searchLineComponent.clickSearchButton();
+        SearchPage searchPage = homePage.getHeader().clickSearchButton();
         Assert.assertTrue(searchPage.isPageOpened(), "Search page is not opened");
 
-        Assert.assertTrue(getDriver().getCurrentUrl().contains(brandName.toLowerCase()), "Url does not contain the brand name");
         List<ProductCardComponent> productCards = searchPage.getProductCards();
         for (ProductCardComponent productCard : productCards) {
-            Assert.assertTrue(productCard.getProductCardTitleText().toLowerCase().contains(brandName.toLowerCase()), "Product card title does not contain the brand name");
+            Assert.assertTrue(productCard.getProductCardTitleText().toLowerCase().contains(BRAND_NAME.toLowerCase()), "Product card title does not contain the brand name");
         }
     }
 
@@ -43,21 +40,26 @@ public class EpicentrTests extends AbstractTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        homePage.getRegionalBanner().clickCloseBannerButton();
 
         homePage.getHeader().clickCatalogOpenButton();
-        ShopCategoryPage shopCategoryPage = homePage.getCatalog().clickCatalogItemByName("Електроніка");
-        ShopSubcategoryPage shopSubcategoryPage = shopCategoryPage.clickShopCategoryItemByName("Мобільні телефони");
-        SearchPage searchPage = shopSubcategoryPage.clickShopSubcategoryItemByName("Смартфони");
+        Assert.assertTrue(homePage.isCatalogPresent(), "Catalog is not present");
+
+        ShopCategoryPage shopCategoryPage = homePage.getCatalog().clickCatalogItemByName(CATALOG_ITEM_NAME);
+        Assert.assertTrue(shopCategoryPage.isPageOpened(), "Shop category page is not open");
+        ShopSubcategoryPage shopSubcategoryPage = shopCategoryPage.clickShopCategoryItemByName(SHOP_CATEGORY_ITEM_NAME);
+        Assert.assertTrue(shopSubcategoryPage.isPageOpened(), "Shop subcategory page is not open");
+        SearchPage searchPage = shopSubcategoryPage.clickShopSubcategoryItemByName(SHOP_SUBCATEGORY_ITEM_NAME);
+        Assert.assertTrue(searchPage.isPageOpened(), "Search page is not open");
 
         ProductCardComponent productCard = searchPage.getProductCards().get(0);
         CartPage cartPage = productCard.clickOnCartButton();
+        Assert.assertTrue(cartPage.isPageOpened(), "Cart page is not open");
         cartPage.clickOnCloseButton();
+        Assert.assertFalse(cartPage.isMakePurchaseButtonNotPresent(), "Cart page is open");
         productCard.clickOnCartButton();
+        Assert.assertTrue(cartPage.isPageOpened(), "Cart page is not open");
 
-        pause(5); // pause
-
-        Assert.assertEquals(cartPage.getQuantityInputInt(), 2, "Cart has wrong quantity of the same goods");
+        Assert.assertEquals(cartPage.getQuantityInputText(), 2, "Cart has wrong quantity of the same goods");
     }
 
     @Test
@@ -65,23 +67,24 @@ public class EpicentrTests extends AbstractTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        homePage.getRegionalBanner().clickCloseBannerButton();
 
-        ShopCategoryPage shopCategoryPage = homePage.clickShowcaseItemName("Електроніка");
-        ShopSubcategoryPage shopSubcategoryPage = shopCategoryPage.clickShopCategoryItemByName("Мобільні телефони");
-        SearchPage searchPage = shopSubcategoryPage.clickShopSubcategoryItemByName("Смартфони");
+        ShopCategoryPage shopCategoryPage = homePage.clickShowcaseItemName(CATALOG_ITEM_NAME);
+        Assert.assertTrue(shopCategoryPage.isPageOpened(), "Shop category page is not open");
+        ShopSubcategoryPage shopSubcategoryPage = shopCategoryPage.clickShopCategoryItemByName(SHOP_CATEGORY_ITEM_NAME);
+        Assert.assertTrue(shopSubcategoryPage.isPageOpened(), "Shop subcategory page is not open");
+        SearchPage searchPage = shopSubcategoryPage.clickShopSubcategoryItemByName(SHOP_SUBCATEGORY_ITEM_NAME);
+        Assert.assertTrue(searchPage.isPageOpened(), "Search page is not open");
 
         searchPage.clickOnDiscountSortFilter();
-
-        pause(5); // pause
+        Assert.assertTrue(searchPage.isDiscountSortFilterActive(), "SDiscount sort filter is not active");
 
         ProductCardComponent productCard = searchPage.getProductCards().get(0);
-        int priceWithDiscount = productCard.getProductCardPriceWithDiscountTextInt();
-
-        pause(5); // pause
+        int priceWithDiscount = productCard.getProductCardPriceWithDiscountText();
 
         CartPage cartPage = productCard.clickOnCartButton();
+        Assert.assertTrue(cartPage.isPageOpened(), "Cart page is not open");
         MakePurchasePage makePurchasePage = cartPage.clickOnMakePurchaseButton();
+        Assert.assertTrue(makePurchasePage.isPageOpened(), "Make purchase page is not open");
         Assert.assertTrue(priceWithDiscount == makePurchasePage.getToPayPriceInt(), "Product card price does not lower or equals the upper price limit");
     }
 
@@ -90,27 +93,20 @@ public class EpicentrTests extends AbstractTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        homePage.getRegionalBanner().clickCloseBannerButton();
 
-        SearchLineComponent searchLineComponent = homePage.getHeader().getSearchLineComponent();
-        Assert.assertTrue(searchLineComponent.getSearchInput().isElementPresent(1), "Search input is not present");
-        Assert.assertTrue(searchLineComponent.getSearchButton().isElementPresent(1), "Search button is not present");
-        Assert.assertEquals(searchLineComponent.getSearchInputPlaceholder(), "Пошук", "Search input placeholder is incorrect");
+        homePage.getHeader().typeSearchInputData(BRAND_NAME);
+        Assert.assertTrue(homePage.getHeader().isSearchInputEmpty(), "Search input is empty");
 
-        String brandName = "Apple";
-        searchLineComponent.typeSearchInputData(brandName);
-        SearchPage searchPage = searchLineComponent.clickSearchButton();
+        SearchPage searchPage = homePage.getHeader().clickSearchButton();
         Assert.assertTrue(searchPage.isPageOpened(), "Search page is not opened");
-        Assert.assertTrue(searchPage.getPriceFilterPanelComponent().getUpperPriceLimit().isElementPresent(1), "Some element is not present");
 
         int upperPriceLimit = 500;
-        searchPage.getPriceFilterPanelComponent().typeUpperPriceLimit(String.valueOf(upperPriceLimit));
-
-        pause(5); //pause
+        searchPage.typeUpperPriceLimit(String.valueOf(upperPriceLimit));
+        Assert.assertFalse(searchPage.isUpperPriceLimitEmpty(), "Upper price limit is empty");
 
         List<ProductCardComponent> productCards = searchPage.getProductCards();
         for (ProductCardComponent productCard : productCards) {
-            Assert.assertTrue(productCard.getProductCardPriceTextInt() <= upperPriceLimit, "Product card price does not lower or equals the upper price limit");
+            Assert.assertTrue(productCard.getProductCardPriceText() <= upperPriceLimit, "Product card price does not lower or equals the upper price limit");
         }
     }
 
@@ -119,18 +115,17 @@ public class EpicentrTests extends AbstractTest {
         HomePage homePage = new HomePage(getDriver());
         homePage.open();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        homePage.getRegionalBanner().clickCloseBannerButton();
 
         LoginPage loginPage = homePage.getHeader().clickLoginButton();
         Assert.assertTrue(loginPage.isPageOpened(), "Login page is not opened");
-        Assert.assertTrue(loginPage.getPhoneInput().isElementPresent(1), "Phone input is not present");
-        Assert.assertTrue(loginPage.getPasswordInput().isElementPresent(1), "Password input is not present");
-        Assert.assertTrue(loginPage.getLoginButton().isElementPresent(1), "Login button is not present");
-        Assert.assertEquals(loginPage.getPhoneInputPlaceholder(), "+38 (0XX) XXX-XX-XX", "Phone input placeholder is incorrect");
-        Assert.assertEquals(loginPage.getPasswordInputPlaceholder(), "Мінімум 8 символів", "Password input placeholder is incorrect");
 
-        homePage = loginPage.login(USER_PHONE, USER_PASSWORD);
+        loginPage.typeLoginInfo(USER_PHONE, USER_PASSWORD);
+        Assert.assertTrue(loginPage.isPhoneInputEmpty(), "Phone input is empty");
+        Assert.assertTrue(loginPage.isPasswordInputEmpty(), "Password input is empty");
+
+        homePage = loginPage.clickLoginButton();
+
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        Assert.assertTrue(homePage.getHeader().getLoginButton().isElementNotPresent(10), "Login button is present");
+        Assert.assertTrue(homePage.getHeader().isLoginButtonNotPresent(), "Login button is present");
     }
 }

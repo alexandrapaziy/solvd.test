@@ -14,7 +14,7 @@ public class BannerComponent extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public void clickCloseBannerButton(){
-        closeBannerButton.click();
+    public void clickCloseBannerButton() {
+        closeBannerButton.clickIfPresent(10);
     }
 }

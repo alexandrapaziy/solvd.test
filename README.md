@@ -19,9 +19,9 @@
   <li>Click on the category (e.g.: “Електроніка”) → Page with types of goods is opened;</li>
   <li>Click on the good type (e.g.: “Мобільні телефони”) → Page with types of goods is opened;</li>
   <li>Click on the good type (e.g.: “Смартфони”) → Page with goods is opened;</li>
-  <li>Click on the add to cart button on the product → Card form is opened;</li>
-  <li>Click on the close button of the cart → Card form is closed;</li>
-  <li>Click on the add to cart button on the same product again → Card form is opened.</li>
+  <li>Click on the add to cart button on the product → Cart form is opened;</li>
+  <li>Click on the close button of the cart → Cart form is closed;</li>
+  <li>Click on the add to cart button on the same product again → Cart form is opened.</li>
 </ol>	
 <h4>Expected result:</h4> The quantity of the same type of product in the cart equals 2.
 
@@ -36,7 +36,7 @@
   <li>Click on the some good type (e.g.: “Мобільні телефони”) → Page with types of goods is opened;</li>
   <li>Click on the some good type (e.g.: “Смартфони”) → Page with goods is opened;</li>
   <li>Navigate to the section named “акції” → Section with promotion is opened;</li>
-  <li>Click on the add to cart button on the product → Card form is opened;</li>
+  <li>Click on the add to cart button on the product → Cart form is opened;</li>
   <li>Click on the “Оформити покупку” button → Order page is opened.</li>
 </ol>
 <h4>Expected result:</h4> The order summary displays the total amount with the applied promotion near “усього до сплати”

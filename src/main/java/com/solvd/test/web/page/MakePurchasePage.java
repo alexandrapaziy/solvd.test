@@ -7,14 +7,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class MakePurchasePage extends AbstractPage {
     @FindBy(xpath = "//div[@data-price]")
-    private ExtendedWebElement toPay;
+    private ExtendedWebElement toPayField;
 
     public MakePurchasePage(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(toPay);
+        setUiLoadedMarker(toPayField);
     }
 
     public int getToPayPriceInt() {
-        return Integer.parseInt(toPay.getText().replaceAll("\\D", ""));
+        return Integer.parseInt(toPayField.getText().replaceAll("\\D", ""));
     }
 }

@@ -6,6 +6,7 @@ import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ProductCardComponent extends AbstractUIObject {
     @FindBy(xpath = ".//a[text()]")
@@ -28,24 +29,17 @@ public class ProductCardComponent extends AbstractUIObject {
         return cardTitle.getText();
     }
 
-    public String getProductCardPriceText() {
-        return price.getText();
-    }
-
-    public int getProductCardPriceTextInt() {
+    public int getProductCardPriceText() {
         return Integer.parseInt(price.getText().replaceAll("\\D", ""));
     }
 
-    public int getProductCardPriceWithDiscountTextInt() {
+    public int getProductCardPriceWithDiscountText() {
         return Integer.parseInt(priceWithDiscount.getText().replaceAll("\\D", ""));
     }
 
     public CartPage clickOnCartButton() {
+        waitUntil(ExpectedConditions.visibilityOf(cartButton), 10);
         cartButton.click();
         return new CartPage(getDriver());
-    }
-
-    public ExtendedWebElement getCartButton() {
-        return cartButton;
     }
 }
