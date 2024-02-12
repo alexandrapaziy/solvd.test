@@ -14,7 +14,7 @@ public class HeaderComponent extends AbstractUIObject {
     @FindBy(xpath = ".//div[@class='header__menu-opener-button']")
     private ExtendedWebElement catalogOpenButton;
 
-    @FindBy(xpath = "//div[@class='header__login-opener']")
+    @FindBy(xpath = "//div[@class='header__login-opener']//span[@class='header__login-opener-text']//span[text()='Увійти']")
     private ExtendedWebElement loginButton;
 
     public HeaderComponent(WebDriver driver, SearchContext searchContext) {

@@ -131,6 +131,6 @@ public class EpicentrTests extends AbstractTest {
 
         homePage = loginPage.login(USER_PHONE, USER_PASSWORD);
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        Assert.assertFalse(homePage.getHeader().getLoginButton().isElementPresent(1), "Login button is present");
+        Assert.assertTrue(homePage.getHeader().getLoginButton().isElementNotPresent(10), "Login button is present");
     }
 }
