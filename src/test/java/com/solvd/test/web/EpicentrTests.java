@@ -4,9 +4,13 @@ import com.solvd.test.web.component.*;
 import com.solvd.test.web.page.*;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.R;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
 
 public class EpicentrTests extends AbstractTest {
@@ -73,6 +77,8 @@ public class EpicentrTests extends AbstractTest {
         SearchPage searchPage = shopSubcategoryPage.clickShopSubcategoryItemByName("Смартфони");
 
         searchPage.clickOnDiscountSortFilter();
+
+        pause(5); // pause
 
         ProductCardComponent productCard = searchPage.getProductCards().get(0);
         int priceWithDiscount = productCard.getProductCardPriceWithDiscountTextInt();

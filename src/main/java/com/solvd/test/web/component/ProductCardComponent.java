@@ -17,7 +17,7 @@ public class ProductCardComponent extends AbstractUIObject {
     @FindBy(xpath = ".//span[@class='card__price-sum']")
     private ExtendedWebElement priceWithDiscount;
 
-    @FindBy(xpath = "//button[@title='Купити']")
+    @FindBy(xpath = ".//button[@title='Купити']")
     private ExtendedWebElement cartButton;
 
     public ProductCardComponent(WebDriver driver, SearchContext searchContext) {
