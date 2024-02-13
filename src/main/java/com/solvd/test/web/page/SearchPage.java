@@ -21,14 +21,14 @@ public class SearchPage extends AbstractPage {
     private ExtendedWebElement upperPriceLimit;
 
     @FindBy(xpath = "//div[contains(@class,'_Y7IP')]")
-    private ExtendedWebElement loading;
+    private ExtendedWebElement loadingSpinner;
 
-    @FindBy(xpath = "//main")
-    private ExtendedWebElement main;
+    @FindBy(xpath = "//h1[text()]")
+    private ExtendedWebElement searchPageTitle;
 
     public SearchPage(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(main);
+        setUiLoadedMarker(searchPageTitle);
     }
 
     public List<ProductCardComponent> getProductCards() {
@@ -68,7 +68,7 @@ public class SearchPage extends AbstractPage {
     }
 
     public void waitLoading() {
-        waitUntil(ExpectedConditions.visibilityOf(loading), 10);
-        waitUntil(ExpectedConditions.invisibilityOf(loading), 10);
+        waitUntil(ExpectedConditions.visibilityOf(loadingSpinner), 10);
+        waitUntil(ExpectedConditions.invisibilityOf(loadingSpinner), 10);
     }
 }

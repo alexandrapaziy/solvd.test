@@ -7,6 +7,7 @@ import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HeaderComponent extends AbstractUIObject {
 
@@ -45,10 +46,11 @@ public class HeaderComponent extends AbstractUIObject {
     }
 
     public boolean isLoginButtonNotPresent() {
+        waitUntil(ExpectedConditions.visibilityOf(loginButton), 10);
         return loginButton.isElementNotPresent(10);
     }
 
-    public boolean isSearchInputEmpty() {
+    public boolean isSearchInputNotEmpty() {
         return searchInput.getAttribute("value") != "";
     }
 }

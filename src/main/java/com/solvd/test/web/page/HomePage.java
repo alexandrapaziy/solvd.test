@@ -7,8 +7,6 @@ import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 public class HomePage extends AbstractPage {
     @FindBy(xpath = "//header[@class='header']")
     private HeaderComponent header;
@@ -22,8 +20,8 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//a[@class='banner-link']")
     private ExtendedWebElement banner;
 
-    @FindBy(xpath = "//a[@class='vetrina__link']")
-    private List<ExtendedWebElement> showcaseItems;
+    @FindBy(xpath = "//h3[contains(text(), '%s')]/../..")
+    private ExtendedWebElement showcaseItem;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -48,13 +46,8 @@ public class HomePage extends AbstractPage {
         return catalog;
     }
 
-    public ShopCategoryPage clickShowcaseItemName(String name) {
-        for (ExtendedWebElement showcaseItem : showcaseItems) {
-            if (showcaseItem.getText().toLowerCase().trim().equals(name.toLowerCase())) {
-                showcaseItem.click();
-                return new ShopCategoryPage(getDriver());
-            }
-        }
-        return null;
+    public ShopCategoryPage clickShowcaseItemName(String title) {
+        showcaseItem.format(title).click();
+        return new ShopCategoryPage(getDriver());
     }
 }

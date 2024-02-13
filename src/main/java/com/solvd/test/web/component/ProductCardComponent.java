@@ -37,7 +37,7 @@ public class ProductCardComponent extends AbstractUIObject {
         return Integer.parseInt(priceWithDiscount.getText().replaceAll("\\D", ""));
     }
 
-    public CartPage clickOnCartButton() {
+    public CartPage clickAddToCartButton() {
         waitUntil(ExpectedConditions.visibilityOf(cartButton), 10);
         cartButton.click();
         return new CartPage(getDriver());

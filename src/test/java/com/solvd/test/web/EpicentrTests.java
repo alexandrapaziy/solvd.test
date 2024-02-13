@@ -24,7 +24,7 @@ public class EpicentrTests extends AbstractTest {
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
 
         homePage.getHeader().typeSearchInputData(BRAND_NAME);
-        Assert.assertTrue(homePage.getHeader().isSearchInputEmpty(), "Search input is empty");
+        Assert.assertTrue(homePage.getHeader().isSearchInputNotEmpty(), "Search input is empty");
 
         SearchPage searchPage = homePage.getHeader().clickSearchButton();
         Assert.assertTrue(searchPage.isPageOpened(), "Search page is not opened");
@@ -52,11 +52,11 @@ public class EpicentrTests extends AbstractTest {
         Assert.assertTrue(searchPage.isPageOpened(), "Search page is not open");
 
         ProductCardComponent productCard = searchPage.getProductCards().get(0);
-        CartPage cartPage = productCard.clickOnCartButton();
+        CartPage cartPage = productCard.clickAddToCartButton();
         Assert.assertTrue(cartPage.isPageOpened(), "Cart page is not open");
         cartPage.clickOnCloseButton();
         Assert.assertFalse(cartPage.isMakePurchaseButtonNotPresent(), "Cart page is open");
-        productCard.clickOnCartButton();
+        productCard.clickAddToCartButton();
         Assert.assertTrue(cartPage.isPageOpened(), "Cart page is not open");
 
         Assert.assertEquals(cartPage.getQuantityInputText(), 2, "Cart has wrong quantity of the same goods");
@@ -81,11 +81,11 @@ public class EpicentrTests extends AbstractTest {
         ProductCardComponent productCard = searchPage.getProductCards().get(0);
         int priceWithDiscount = productCard.getProductCardPriceWithDiscountText();
 
-        CartPage cartPage = productCard.clickOnCartButton();
+        CartPage cartPage = productCard.clickAddToCartButton();
         Assert.assertTrue(cartPage.isPageOpened(), "Cart page is not open");
         MakePurchasePage makePurchasePage = cartPage.clickOnMakePurchaseButton();
         Assert.assertTrue(makePurchasePage.isPageOpened(), "Make purchase page is not open");
-        Assert.assertTrue(priceWithDiscount == makePurchasePage.getToPayPriceInt(), "Product card price does not lower or equals the upper price limit");
+        Assert.assertEquals(priceWithDiscount, makePurchasePage.getToPayPriceInt(), "Product card price does not lower or equals the upper price limit");
     }
 
     @Test
@@ -95,7 +95,7 @@ public class EpicentrTests extends AbstractTest {
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
 
         homePage.getHeader().typeSearchInputData(BRAND_NAME);
-        Assert.assertTrue(homePage.getHeader().isSearchInputEmpty(), "Search input is empty");
+        Assert.assertTrue(homePage.getHeader().isSearchInputNotEmpty(), "Search input is empty");
 
         SearchPage searchPage = homePage.getHeader().clickSearchButton();
         Assert.assertTrue(searchPage.isPageOpened(), "Search page is not opened");
@@ -120,8 +120,8 @@ public class EpicentrTests extends AbstractTest {
         Assert.assertTrue(loginPage.isPageOpened(), "Login page is not opened");
 
         loginPage.typeLoginInfo(USER_PHONE, USER_PASSWORD);
-        Assert.assertTrue(loginPage.isPhoneInputEmpty(), "Phone input is empty");
-        Assert.assertTrue(loginPage.isPasswordInputEmpty(), "Password input is empty");
+        Assert.assertTrue(loginPage.isPhoneInputNotEmpty(), "Phone input is empty");
+        Assert.assertTrue(loginPage.isPasswordInputNotEmpty(), "Password input is empty");
 
         homePage = loginPage.clickLoginButton();
 

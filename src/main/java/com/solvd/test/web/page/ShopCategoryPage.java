@@ -5,24 +5,21 @@ import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 public class ShopCategoryPage extends AbstractPage {
-    @FindBy(xpath = "//a[contains(@class, 'shop-category__title')]")
-    private List<ExtendedWebElement> shopCategories;
+    @FindBy(xpath = "//a[contains(@class, 'shop-category__title') and contains(text(), '%s')]")
+    private ExtendedWebElement shopCategory;
+
+    @FindBy(xpath = "//header[@class='shop-categories__header']")
+    private ExtendedWebElement shopCategoryPageTitle;
+
 
     public ShopCategoryPage(WebDriver driver) {
         super(driver);
-        setUiLoadedMarker(shopCategories.get(0));
+        setUiLoadedMarker(shopCategoryPageTitle);
     }
 
-    public ShopSubcategoryPage clickShopCategoryItemByName(String name) {
-        for (ExtendedWebElement shopCategory : shopCategories) {
-            if (shopCategory.getText().toLowerCase().trim().equals(name.toLowerCase())) {
-                shopCategory.click();
-                return new ShopSubcategoryPage(getDriver());
-            }
-        }
-        return null;
+    public ShopSubcategoryPage clickShopCategoryItemByName(String title) {
+        shopCategory.format(title).click();
+        return new ShopSubcategoryPage(getDriver());
     }
 }

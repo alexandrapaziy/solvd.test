@@ -34,11 +34,11 @@ public class LoginPage extends AbstractPage {
         return new HomePage(getDriver());
     }
 
-    public boolean isPhoneInputEmpty() {
+    public boolean isPhoneInputNotEmpty() {
         return phoneInput.getAttribute("value") != "";
     }
 
-    public boolean isPasswordInputEmpty() {
+    public boolean isPasswordInputNotEmpty() {
         return passwordInput.getAttribute("value") != "";
     }
 }

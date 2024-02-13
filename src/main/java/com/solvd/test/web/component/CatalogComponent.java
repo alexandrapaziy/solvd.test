@@ -7,23 +7,16 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 public class CatalogComponent extends AbstractUIObject {
-    @FindBy(xpath = ".//li[@class='catalog-menu__level-1']//a[@class='menu-link']")
-    private List<ExtendedWebElement> catalogItems;
+    @FindBy(xpath = ".//li[@class='catalog-menu__level-1']//a[@class='menu-link' and @title='%s']")
+    private ExtendedWebElement catalogItem;
 
     public CatalogComponent(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public ShopCategoryPage clickCatalogItemByName(String name) {
-        for (ExtendedWebElement catalogItem : catalogItems) {
-            if (catalogItem.getText().toLowerCase().trim().equals(name.toLowerCase())) {
-                catalogItem.click();
-                return new ShopCategoryPage(getDriver());
-            }
-        }
-        return null;
+    public ShopCategoryPage clickCatalogItemByName(String title) {
+        catalogItem.format(title).click();
+        return new ShopCategoryPage(getDriver());
     }
 }
