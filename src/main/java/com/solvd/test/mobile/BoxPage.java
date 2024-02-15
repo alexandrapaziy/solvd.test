@@ -15,7 +15,7 @@ public class BoxPage extends AbstractPage {
     @FindBy(xpath = "//android.widget.Button[@content-desc='%s']")
     private ExtendedWebElement editCardButton;
 
-    @FindBy(xpath = "//android.view.View[@content-desc='NewBox']/following-sibling::*[1]")
+    @FindBy(xpath = "//android.widget.Button[@content-desc='Back']/following-sibling::android.widget.Button")
     private ExtendedWebElement settingsButton;
 
     @FindBy(xpath = "//android.widget.Button[contains(@content-desc, 'Delete')]")
@@ -25,7 +25,7 @@ public class BoxPage extends AbstractPage {
         super(driver);
     }
 
-    public boolean isBoxPageOpen() {
+    public boolean isBoxPageOpened() {
         return addCardButton.isElementPresent();
     }
 
@@ -34,11 +34,11 @@ public class BoxPage extends AbstractPage {
         return new AddCardPage(getDriver());
     }
 
-    public boolean isCardWithThisNamePresent(String name) {
+    public boolean isCardPresentByName(String name) {
         return cardElement.format(name).isElementPresent();
     }
 
-    public EditCardPage clickOnEditCardButtonWithThisName(String name) {
+    public EditCardPage clickOnEditCardButtonByName(String name) {
         editCardButton.format(name).click();
         return new EditCardPage(getDriver());
     }

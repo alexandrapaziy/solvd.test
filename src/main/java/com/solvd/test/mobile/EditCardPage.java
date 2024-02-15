@@ -13,7 +13,7 @@ public class EditCardPage extends AbstractPage {
         super(driver);
     }
 
-    public boolean isEditCardPageOpen() {
+    public boolean isEditCardPageOpened() {
         return deleteCardButton.isElementPresent();
     }
 

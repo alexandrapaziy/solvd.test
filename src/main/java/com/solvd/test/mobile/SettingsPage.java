@@ -19,7 +19,7 @@ public class SettingsPage extends AbstractPage {
         super(driver);
     }
 
-    public boolean isSettingsPageOpen() {
+    public boolean isSettingsPageOpened() {
         return yourNameField.isElementPresent();
     }
 

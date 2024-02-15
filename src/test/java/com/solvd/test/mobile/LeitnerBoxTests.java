@@ -3,6 +3,8 @@ package com.solvd.test.mobile;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class LeitnerBoxTests extends AbstractTest implements IMobileUtils {
@@ -10,22 +12,30 @@ public class LeitnerBoxTests extends AbstractTest implements IMobileUtils {
     private static final String FRONT_SIDE = "Cat";
     private static final String BACK_SIDE = "An animal with four legs";
 
+    @BeforeTest
+    public void beforeTest() {
+        startApp("com.floor57.leitnerbox");
+    }
+
+    @AfterTest
+    public void afterTest() {
+        terminateApp("com.floor57.leitnerbox");
+    }
+
     @Test
     public void verifyYourNameInWelcomeTitleTest() {
-        startApp("com.floor57.leitnerbox");
-
         WelcomePage welcomePage = new WelcomePage(getDriver());
-        Assert.assertTrue(welcomePage.isWelcomePageOpen(), "Welcome page is not open");
+        Assert.assertTrue(welcomePage.isWelcomePageOpened(), "Welcome page is not opened");
 
         SettingsPage settingsPage = welcomePage.clickOnSettingsButton();
-        Assert.assertTrue(settingsPage.isSettingsPageOpen(), "Settings page is not open");
+        Assert.assertTrue(settingsPage.isSettingsPageOpened(), "Settings page is not opened");
 
         settingsPage.clickOnYourNameField();
         String yourName = settingsPage.getYourNameTypingFieldText();
         Assert.assertNotEquals("", yourName, "Name is not taken");
 
         welcomePage = settingsPage.clickOnBackButton();
-        Assert.assertTrue(welcomePage.isWelcomePageOpen(), "Welcome page is not open");
+        Assert.assertTrue(welcomePage.isWelcomePageOpened(), "Welcome page is not opened");
 
         String welcomeTitle = welcomePage.getTitleText(yourName);
         Assert.assertEquals(welcomeTitle, "Hi, " + yourName + "!", "Name in welcome title is not correct");
@@ -33,36 +43,32 @@ public class LeitnerBoxTests extends AbstractTest implements IMobileUtils {
 
     @Test()
     public void verifyNewBoxCreatingTest() {
-        startApp("com.floor57.leitnerbox");
-
         WelcomePage welcomePage = new WelcomePage(getDriver());
-        Assert.assertTrue(welcomePage.isWelcomePageOpen(), "Welcome page is not open");
+        Assert.assertTrue(welcomePage.isWelcomePageOpened(), "Welcome page is not opened");
 
         AddBoxPage addNewBoxPage = welcomePage.clickOnAddNewBoxButton();
-        Assert.assertTrue(addNewBoxPage.isAddBoxPageOpen(), "Add new box page is not open");
+        Assert.assertTrue(addNewBoxPage.isAddBoxPageOpened(), "Add new box page is not opened");
 
         addNewBoxPage.typeBoxName(BOX_NAME);
         Assert.assertEquals(addNewBoxPage.getBoxFieldText(), BOX_NAME, "Box name is not typed");
 
         welcomePage = addNewBoxPage.clickOnCreateBoxButton();
-        Assert.assertTrue(welcomePage.isWelcomePageOpen(), "Welcome page is not open");
+        Assert.assertTrue(welcomePage.isWelcomePageOpened(), "Welcome page is not opened");
 
-        Assert.assertTrue(welcomePage.isBoxWithThisNamePresent(BOX_NAME));
+        Assert.assertTrue(welcomePage.isBoxWithThisNamePresent(BOX_NAME), "Box is not present");
     }
 
     @Test
     public void verifyAddNewCardsToBoxTest() {
-        startApp("com.floor57.leitnerbox");
-
         WelcomePage welcomePage = new WelcomePage(getDriver());
-        Assert.assertTrue(welcomePage.isWelcomePageOpen(), "Welcome page is not open");
-        Assert.assertTrue(welcomePage.isBoxWithThisNamePresent(BOX_NAME));
+        Assert.assertTrue(welcomePage.isWelcomePageOpened(), "Welcome page is not opened");
+        Assert.assertTrue(welcomePage.isBoxWithThisNamePresent(BOX_NAME), "Box is not present");
 
-        BoxPage boxPage = welcomePage.clickOnBoxWithThisName(BOX_NAME);
-        Assert.assertTrue(boxPage.isBoxPageOpen(), "Box page is not open");
+        BoxPage boxPage = welcomePage.clickOnBoxByName(BOX_NAME);
+        Assert.assertTrue(boxPage.isBoxPageOpened(), "Box page is not opened");
 
         AddCardPage addCardPage = boxPage.clickOnAddCardButton();
-        Assert.assertTrue(addCardPage.isAddCardPageOpen(), "Add card page is not open");
+        Assert.assertTrue(addCardPage.isAddCardPageOpened(), "Add card page is not opened");
 
         addCardPage.typeCardFrontSide(FRONT_SIDE);
         Assert.assertEquals(addCardPage.getCardFrontSideText(), FRONT_SIDE, "Front side text is not typed");
@@ -70,46 +76,42 @@ public class LeitnerBoxTests extends AbstractTest implements IMobileUtils {
         Assert.assertEquals(addCardPage.getCardBackSideText(), BACK_SIDE, "Back side text is not typed");
 
         boxPage = addCardPage.clickOnDoneButton();
-        Assert.assertTrue(boxPage.isBoxPageOpen(), "Box page is not open");
+        Assert.assertTrue(boxPage.isBoxPageOpened(), "Box page is not opened");
 
-        Assert.assertTrue(boxPage.isCardWithThisNamePresent(FRONT_SIDE));
+        Assert.assertTrue(boxPage.isCardPresentByName(FRONT_SIDE), "Card is not present");
     }
 
     @Test
     public void verifyDeleteCardFromBoxTest() {
-        startApp("com.floor57.leitnerbox");
-
         WelcomePage welcomePage = new WelcomePage(getDriver());
-        Assert.assertTrue(welcomePage.isWelcomePageOpen(), "Welcome page is not open");
-        Assert.assertTrue(welcomePage.isBoxWithThisNamePresent(BOX_NAME));
+        Assert.assertTrue(welcomePage.isWelcomePageOpened(), "Welcome page is not opened");
+        Assert.assertTrue(welcomePage.isBoxWithThisNamePresent(BOX_NAME), "Box is not present");
 
-        BoxPage boxPage = welcomePage.clickOnBoxWithThisName(BOX_NAME);
-        Assert.assertTrue(boxPage.isBoxPageOpen(), "Box page is not open");
+        BoxPage boxPage = welcomePage.clickOnBoxByName(BOX_NAME);
+        Assert.assertTrue(boxPage.isBoxPageOpened(), "Box page is not opened");
 
-        EditCardPage editCardPage = boxPage.clickOnEditCardButtonWithThisName(FRONT_SIDE);
-        Assert.assertTrue(editCardPage.isEditCardPageOpen(), "Edit card page is not open");
+        EditCardPage editCardPage = boxPage.clickOnEditCardButtonByName(FRONT_SIDE);
+        Assert.assertTrue(editCardPage.isEditCardPageOpened(), "Edit card page is not opened");
 
         boxPage = editCardPage.clickOnDeleteCardButton();
-        Assert.assertTrue(boxPage.isBoxPageOpen(), "Box page is not open");
-        Assert.assertFalse(boxPage.isCardWithThisNamePresent(FRONT_SIDE), "Card is still present");
+        Assert.assertTrue(boxPage.isBoxPageOpened(), "Box page is not opened");
+        Assert.assertFalse(boxPage.isCardPresentByName(FRONT_SIDE), "Card is still present");
     }
 
     @Test
     public void verifyDeleteBoxTest() {
-        startApp("com.floor57.leitnerbox");
-
         WelcomePage welcomePage = new WelcomePage(getDriver());
-        Assert.assertTrue(welcomePage.isWelcomePageOpen(), "Welcome page is not open");
-        Assert.assertTrue(welcomePage.isBoxWithThisNamePresent(BOX_NAME));
+        Assert.assertTrue(welcomePage.isWelcomePageOpened(), "Welcome page is not opened");
+        Assert.assertTrue(welcomePage.isBoxWithThisNamePresent(BOX_NAME), "Box is not present");
 
-        BoxPage boxPage = welcomePage.clickOnBoxWithThisName(BOX_NAME);
-        Assert.assertTrue(boxPage.isBoxPageOpen(), "Box page is not open");
+        BoxPage boxPage = welcomePage.clickOnBoxByName(BOX_NAME);
+        Assert.assertTrue(boxPage.isBoxPageOpened(), "Box page is not opened");
 
         boxPage.clickOnSettingsButton();
         Assert.assertTrue(boxPage.isDeleteButtonPresent(), "Delete button is not present");
 
         welcomePage = boxPage.clickOnDeleteButton();
-        Assert.assertTrue(welcomePage.isWelcomePageOpen(), "Welcome page is not open");
+        Assert.assertTrue(welcomePage.isWelcomePageOpened(), "Welcome page is not opened");
 
         Assert.assertFalse(welcomePage.isBoxWithThisNamePresent(BOX_NAME), "Box is still present");
     }

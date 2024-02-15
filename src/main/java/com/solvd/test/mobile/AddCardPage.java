@@ -19,7 +19,7 @@ public class AddCardPage extends AbstractPage {
         super(driver);
     }
 
-    public boolean isAddCardPageOpen() {
+    public boolean isAddCardPageOpened() {
         return frontSideField.isElementPresent();
     }
 

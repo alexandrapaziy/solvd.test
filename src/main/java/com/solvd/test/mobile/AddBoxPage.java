@@ -16,7 +16,7 @@ public class AddBoxPage extends AbstractPage {
         super(driver);
     }
 
-    public boolean isAddBoxPageOpen() {
+    public boolean isAddBoxPageOpened() {
         return createBoxButton.isElementPresent();
     }
 

@@ -22,7 +22,7 @@ public class WelcomePage extends AbstractPage {
         super(driver);
     }
 
-    public boolean isWelcomePageOpen() {
+    public boolean isWelcomePageOpened() {
         return addNewBoxButton.isElementPresent();
     }
 
@@ -44,7 +44,7 @@ public class WelcomePage extends AbstractPage {
         return boxElement.format(name).isElementPresent();
     }
 
-    public BoxPage clickOnBoxWithThisName(String name) {
+    public BoxPage clickOnBoxByName(String name) {
         boxElement.format(name).click();
         return new BoxPage(getDriver());
     }
