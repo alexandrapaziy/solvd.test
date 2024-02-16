@@ -17,11 +17,6 @@ public class LeitnerBoxTests extends AbstractTest implements IMobileUtils {
         startApp("com.floor57.leitnerbox");
     }
 
-    @AfterTest
-    public void afterTest() {
-        terminateApp("com.floor57.leitnerbox");
-    }
-
     @Test
     public void verifyYourNameInWelcomeTitleTest() {
         WelcomePage welcomePage = new WelcomePage(getDriver());
@@ -41,7 +36,7 @@ public class LeitnerBoxTests extends AbstractTest implements IMobileUtils {
         Assert.assertEquals(welcomeTitle, "Hi, " + yourName + "!", "Name in welcome title is not correct");
     }
 
-    @Test()
+    @Test
     public void verifyNewBoxCreatingTest() {
         WelcomePage welcomePage = new WelcomePage(getDriver());
         Assert.assertTrue(welcomePage.isWelcomePageOpened(), "Welcome page is not opened");
@@ -114,5 +109,10 @@ public class LeitnerBoxTests extends AbstractTest implements IMobileUtils {
         Assert.assertTrue(welcomePage.isWelcomePageOpened(), "Welcome page is not opened");
 
         Assert.assertFalse(welcomePage.isBoxWithThisNamePresent(BOX_NAME), "Box is still present");
+    }
+
+    @AfterTest
+    public void afterTest() {
+        terminateApp("com.floor57.leitnerbox");
     }
 }
