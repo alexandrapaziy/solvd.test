@@ -1,3 +1,73 @@
+<h3>/ / / / / / / / / / / / / / / / / / / / MOBILE / / / / / / / / / / / / / / / / / / / /</h3>
+<h3>Test the functionality of name showing in welcome title</h3>
+<p><i>(Verifying that name is correct in welcome title)</i></p>
+<h4>Steps:</h4>
+<ol>
+  <li>Go to the Welcome page → Welcome page is opened;</li>
+  <li>Click on the settings button → Settings page is opened;</li>
+  <li>Take name from 'Your name' → Name is taken;</li>
+  <li>Click on the back button → Welcome page is opened.</li>
+</ol>
+<h4>Expected result:</h4> Name in welcome title is the same as in the settings page.
+
+<br><br>
+
+<h3>Test the functionality of creating new box</h3>
+<p><i>(Verifying that new box was created)</i></p>
+<h4>Steps:</h4>
+<ol>
+  <li>Go to the Welcome page → Welcome page is opened;</li>
+  <li>Click on the 'Add New Box' button → Add new box page is opened;</li>
+  <li>Type name of the box (e.g.: “NewBox”) → Name was typed (e.g.: “NewBox”);</li>
+  <li>Click on the 'Create Box' button → Welcome page is opened.</li>
+</ol>
+<h4>Expected result:</h4> New box with some name (e.g.: “NewBox”) is present in welcome page.
+
+<br><br>
+
+<h3>Test the functionality of creating new card</h3>
+<p><i>(Verifying that new card was created)</i></p>
+<h4>Steps:</h4>
+<ol>
+  <li>Go to the Welcome page → Welcome page is opened and box with some name (e.g.: “NewBox”) is present;</li>
+  <li>Click on the box with the same name (e.g.: “Animals”) → Box page is opened;</li>
+  <li>Click on the 'Add Card' button → Add card page is opened;</li>
+  <li>Type front side of the card (e.g.: “Cat”) → Front side was typed (e.g.: “Cat”);</li>
+  <li>Type back side of the card (e.g.: “An animal with four legs”) → Back side was typed (e.g.: “An animal with four legs”);</li>
+  <li>Click on the done button → Box page is opened.</li>
+</ol>
+<h4>Expected result:</h4> New card with some name (e.g.: “Cat”) is present in the box page.
+
+<br><br>
+
+<h3>Test the functionality of deleting the card</h3>
+<p><i>(Verifying that card was deleted)</i></p>
+<h4>Steps:</h4>
+<ol>
+  <li>Go to the Welcome page → Welcome page is opened and box with some name (e.g.: “Animals”) is present;</li>
+  <li>Click on the box with the same name (e.g.: “Animals”) → Box page is opened;</li>
+  <li>Click on the edit card with some name (e.g.: “Cat”) → Edit card page is opened;</li>
+  <li>Click on the 'Delete Card' button → Box page is opened.</li>
+</ol>
+<h4>Expected result:</h4> Card with some name (e.g.: “Cat”) is not present in the box page.
+
+<br><br>
+
+<h3>Test the functionality of deleting the box</h3>
+<p><i>(Verifying that box was deleted)</i></p>
+<h4>Steps:</h4>
+<ol>
+  <li>Go to the Welcome page → Welcome page is opened and box with some name (e.g.: “Animals”) is present;</li>
+  <li>Click on the box with the same name (e.g.: “Animals”) → Box page is opened;</li>
+  <li>Click on the settings button → 'Delete' button is present;</li>
+  <li>Click on the 'Delete' button → Welcome page is opened.</li>
+</ol>
+<h4>Expected result:</h4> Box with some name (e.g.: “Animals”) is not present in the welcome page.
+
+<br><br>
+
+<h3>/ / / / / / / / / / / / / / / / / / / / / WEB / / / / / / / / / / / / / / / / / / / / /</h3>
+
 <h3>Test the functionality of product search</h3>
 <p><i>(Verifying the product search by entering a brand name and ensuring that the title of each product card contains that brand name)</i></p>
 <h4>Steps:</h4>
@@ -10,7 +80,7 @@
 
 <br><br>
 
-<h3>Test the functionality of adding a product to the cart</h3> 
+<h3>Test the functionality of adding a product to the cart</h3>
 <p><i>(Verifying if products are successfully added to the cart)</i></p>
 <h4>Steps:</h4>
 <ol>
