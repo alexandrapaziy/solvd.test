@@ -18,7 +18,7 @@
 <ol>
   <li>Go to the Welcome page → Welcome page is opened;</li>
   <li>Click on the 'Add New Box' button → Add new box page is opened;</li>
-  <li>Type name of the box (e.g.: “NewBox”) → Name was typed (e.g.: “NewBox”);</li>
+  <li>Type name of the box (e.g.: “Animals”) → Name was typed (e.g.: “Animals”);</li>
   <li>Click on the 'Create Box' button → Welcome page is opened.</li>
 </ol>
 <h4>Expected result:</h4> New box with some name (e.g.: “NewBox”) is present in welcome page.
@@ -29,7 +29,7 @@
 <p><i>(Verifying that new card was created)</i></p>
 <h4>Steps:</h4>
 <ol>
-  <li>Go to the Welcome page → Welcome page is opened and box with some name (e.g.: “NewBox”) is present;</li>
+  <li>Go to the Welcome page → Welcome page is opened and box with some name (e.g.: “Animals”) is present;</li>
   <li>Click on the box with the same name (e.g.: “Animals”) → Box page is opened;</li>
   <li>Click on the 'Add Card' button → Add card page is opened;</li>
   <li>Type front side of the card (e.g.: “Cat”) → Front side was typed (e.g.: “Cat”);</li>
